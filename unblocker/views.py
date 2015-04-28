@@ -17,10 +17,16 @@ def incoming_call():
 
     if request.form.get('Unblocked', False):
         # This was a withheld number - lets forward the call
+        forwardedFrom = request.form.get("ForwardedFrom", "")
+        to = '+447449967482'
+
+        if len(forwardedFrom) > 5:
+            to = forwardedFrom.replace("+1", "+44")
+
         ctx = {
             'to': '+447449967482',
             'callerId': request.form.get('From'),
-            'record': "true"
+            'record': "false"
         }
         out = render_template('call_passthrough.xml', **ctx)
     else:
