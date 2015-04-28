@@ -1,9 +1,32 @@
-application: volcanicpixels
+application: call-unblocker-service
 version: 1
 runtime: python27
 threadsafe: yes
 api_version: 1
 
 handlers:
- - url: static/.*
+ - url: /static
    static_dir: static
+ - url: .*
+   script: unblocker.app
+
+skip_files:
+- ^(.*/)?app\.yaml
+- ^(.*/)?app\.yml
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+- ^(.*/)?tests$
+- ^(.*/)?test$
+- ^test/(.*/)?
+- ^COPYING.LESSER
+- ^README\..*
+- \.gitignore
+- ^\.git/.*
+- \.*\.lint$
+- ^fabfile\.py
+- ^testrunner\.py
+- ^grunt\.js
+- ^node_modules/(.*/)?
